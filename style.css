@@ -1,0 +1,927 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+.grey {
+    color: rgb(108, 108, 108);
+    font-size: 16px;
+    font-weight: 350;
+}
+
+li {
+    list-style-type: none;
+}
+
+section {
+    background-color: rgb(245, 245, 245);
+     
+}
+.click {
+    transition: all 300ms ease;
+}
+
+.click:hover {
+    transform: scale(1.1);
+}
+.click:active {
+    transform: scale(.8);
+}
+
+p {
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+   padding: 50px 0;
+}
+
+.row {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 12px;
+
+}
+
+button {
+    cursor: pointer;
+}
+
+.title {
+    font-size: 100px;
+    margin-bottom: 12px;
+    text-align: left;
+    line-height: 1;
+
+}
+
+
+.orange {
+    color: #e26147;
+}
+
+.scroll {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll__icon {
+    width: 20px;
+    height: 30px;
+    border: 2px solid #242424;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.scroll__icon:after {
+    content: "";
+    background-color: #242424;
+    width: 4px;
+    height: 6px;
+    border-radius: 2px;
+    animation: scroll 1000ms infinite alternate-reverse;
+}
+
+@keyframes scroll {
+    0% {
+      transform: translateY(3px);  
+    }
+    100% {
+        transform: translateY(-3px);
+    }
+}
+
+/*  NAVIGATION */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100px;
+    padding: 0 20px;
+}
+
+#personal-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, .5);
+}
+
+.nav__link--list {
+    display: flex;
+}
+.nav__link {
+    margin: 0 12px;
+    border-radius: 50%;
+    
+}
+.nav__link--anchor {
+    font-size: 16px;
+    color: #242424;
+    font-weight: 700;
+}
+
+.fa-solid {
+    font-size: 18px;
+}
+
+.fa-flip {
+    /* Default is usually 1s or 2s. Higher = Slower */
+    --fa-animation-duration: 4s; 
+}
+
+
+
+/*  LANDING PAGE */
+
+#landing-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    /* REMOVE: position: absolute, top, left, transform */
+    flex-grow: 1; /* Makes header take up remaining space */
+    display: flex;
+    align-items: center; /* Centers content vertically */
+    justify-content: center; /* Centers content horizontally */
+    width: 100%;
+    
+}
+.header__para {
+    font-size: 24px;
+    line-height: 1.75;
+    max-width: 450px;
+}
+
+.social__list {
+    margin-top: 16px;
+    display: flex;
+
+}
+.social__link {
+    background-color: #e26147;
+    color: white;
+    padding: 6px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border-radius: 50%;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, .5);
+}
+.mail__btn {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    border-radius: 50%;
+    border: none;
+    background-color: #242424;
+    color: white;
+    cursor: pointer;
+     position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    border-radius: 50%;
+    box-shadow: 5px 5px 22px rgba(0, 0, 0, .5);
+}
+
+
+/* ARTISTS */
+
+.section__title {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 60px;
+}
+.artist__img {
+    width: 100%;
+    height: 100%;      /* Forces image to match the container's height */
+    object-fit: cover;  /* Crops and zooms to fill the box without squishing */
+    display: block;
+}
+
+.artist__wrapper {
+position: relative;
+border-radius: 20px;
+box-shadow: 0 20px 80px 0 rgb(0, 0, 0.45);
+overflow: hidden;
+}
+
+.artist__list {
+    display: grid;
+    grid-template-columns: 1fr; /* Stacks them in one column */
+    gap: 40px;                 /* This creates the space between the wrappers */
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;            /* Centers the whole list */
+}
+
+.artist__wrapper:hover .artist__description {
+    opacity: 1;
+    transform: translateY(-50%);
+}
+.artist__wrapper:hover .artist__img {
+transform: scale(1.07);
+filter: blur(5px);
+}
+
+.artist__description {
+    position: absolute;
+    top: 50%;
+    left: 90px;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: opacity 300ms, transform 450ms ease;
+    color: white;
+    max-width: 550px;
+}
+.artist__wrapper:hover .artist__wrapper--bg {
+    opacity: 0.7;
+}
+.artist__wrapper--bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1c1d25;
+    opacity: 0;
+}
+
+.artist__description--title {
+    font-size: 40px;
+}
+
+.artist__description--sub-title {
+    margin-top: 8px;
+}
+
+.artist__description--link {
+    color: white;
+    font-size: 20px;
+    margin-right: 16px;
+}
+.artist__description--para {
+    margin: 16px 0;
+}
+
+/* LABEL */
+
+/* Container for the whole section */
+#label {
+    padding: 80px 0;
+    background-color: #f9f9f9; /* Subtle contrast from pure white */
+}
+
+.label__container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+/* Logo and Description Section */
+.label__description {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.label__title {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.label__description--para {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.label__img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden; /* This "clips" the image into the circle */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 2px solid #e26147; /* Optional: matching your orange theme */
+}
+
+.label__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents the logo from looking squished */
+} 
+
+.label__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+/* Feature Row (Stage Section) */
+.label__row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Modern soft shadow */
+    transition: transform 0.3s ease;
+}
+
+.label__row:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Image Styling */
+.stage__img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    filter: grayscale(20%); /* Artistic touch */
+    transition: filter 0.3s ease;
+}
+
+.label__row:hover .stage__img {
+    filter: grayscale(0%); /* Color pops on hover */
+}
+
+.grid__container {
+    display: grid;
+    /* This creates exactly 2 columns of equal width */
+    grid-template-columns: 1fr 1fr; 
+    gap: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Optional: Make it 1 column on mobile so it doesn't look cramped */
+@media (max-width: 600px) {
+    .grid__container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+.grid__item img {
+    width: 100%;
+    height: 300px; /* Adjust height as desired */
+    object-fit: cover; /* Keeps image proportions while filling the box */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.grid__item:hover img {
+    transform: scale(1.05); /* Subtle zoom effect on hover */
+}
+
+/* Responsive Fix for Mobile */
+@media (max-width: 768px) {
+    .label__row {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .label__title {
+        font-size: 36px;
+    }
+}
+
+
+/* SHOP */
+
+.product__img--wrapper {
+    position: relative; /* Anchor for the absolute print */
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.product__img--wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* A very subtle grain/noise texture */
+    background-image: url('https://transparenttextures.com'); 
+    opacity: 0.05; /* Keep this extremely low so it's barely visible */
+    pointer-events: none;
+    z-index: 3;
+}
+.shop__title {
+    text-align: center;      /* Centers the text horizontally */
+    font-size: 48px;         /* Optional: makes it stand out like your other titles */
+    padding: 40px 0;         /* Adds 40px of vertical space inside the element */
+    margin-bottom: 24px;     /* Adds extra breathing room before the grid starts */
+    width: 100%;             /* Ensures it spans the full width to center correctly */
+}
+
+.shop__grid {
+    display: grid;
+    /* This creates 3 equal columns */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 40px; /* Adjust the spacing between the cards */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    
+}
+
+/* Ensure the cards themselves center their content */
+.product__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+     /* The Border Radius */
+    border-radius: 20px; 
+    
+    /* Making it visible */
+    background-color: white; 
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle outline */
+    
+    /* Optional: adds depth to the rounded shape */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 300ms ease;
+}
+
+/* Optional: Slight lift when you hover over the card */
+.product__card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+
+.hoodie-base {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.print-overlay {
+    position: absolute;
+    /* Adjust these percentages to move the print on the chest */
+    top: 44%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Control the size of the print graphic */
+    width: 35%; 
+    height: auto;
+    
+    /* Optional: Slight transparency or blend mode to look more like fabric */
+    opacity: 0.9;
+    mix-blend-mode: multiply; 
+    pointer-events: none; /* Ensures clicks hit the card, not just the image */
+    filter: contrast(1.1) brightness(1.1) blur(0.2px); /* Softens the digital edges */
+    pointer-events: none;
+    mask-image: radial-gradient(
+        circle, 
+        black 80%, 
+        rgba(0, 0, 0, 0.5) 95%, 
+        transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+        circle, 
+        black 80%, 
+        rgba(0, 0, 0, 0.5) 95%, 
+        transparent 100%
+    );
+}
+
+@media (max-width: 900px) {
+    .shop__grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 per line on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .shop__grid {
+        grid-template-columns: 1fr; /* 1 per line on phones */
+    }
+}
+
+/* SHOPPING CART */
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    max-height: 400px; /* Limits height */
+    overflow-y: auto;  /* Adds scrollbar if too many items */
+    margin: 20px 0;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #888;
+    margin-top: 50px;
+}
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #242424;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f5f5f5;
+    padding-bottom: 10px;
+}
+.checkout-btn {
+    width: 100%;
+    background-color: #e26147; /* Your orange theme */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+}
+/* Fixed Tab - Pinned to Left Center */
+#cart-tab {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #242424;
+    color: white;
+    padding: 20px 15px;
+    border-radius: 0 12px 12px 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+
+
+/* Start them hidden and centered */
+#cart-modal, #cart-overlay {
+    position: fixed;
+    visibility: hidden; /* Using visibility + opacity for smoother transitions */
+    opacity: 0;
+    transition: all 300ms ease;
+}
+
+#cart-modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8); /* Start slightly smaller */
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    z-index: 10001;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+#cart-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+}
+
+/* THE FIX: These classes trigger the opening */
+.cart-open #cart-modal {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); /* Pop into full size */
+}
+
+.cart-open #cart-overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+/* COMMUNITY */
+.community__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.community__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.blog__row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Enables horizontal scroll */
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory; /* Snaps cards into place */
+}
+
+/* Hide scrollbar for a cleaner look */
+.blog__row::-webkit-scrollbar {
+    display: none;
+}
+
+.blog__post {
+    flex: 0 0 calc(25% - 15px); /* Forces 4 cards per line */
+    scroll-snap-align: start;
+    min-width: 250px; /* Ensures they don't get too small on tablets */
+}
+
+/* Reusing your Artist Section Hover Logic */
+.blog__post:hover .artist__description {
+    opacity: 1;
+    transform: translateY(-50%);
+}
+
+.blog__post:hover .artist__img {
+    transform: scale(1.1);
+    filter: blur(4px);
+}
+
+/* Arrow Button Styling */
+.slider__btn {
+    background-color: #242424;
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 300ms ease;
+}
+
+.slider__btn:hover {
+    background-color: #e26147;
+}
+
+.slider__btns {
+    margin-top: 20px;       /* Adds space between the centered title and buttons */
+    display: flex;
+    justify-content: center;
+}
+
+/* If you want the arrows to stay on the FAR SIDES of the screen while title is centered: */
+.slider__btns {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    pointer-events: none; 
+}
+.slider__btn { pointer-events: all; }
+
+
+
+
+/* NEWSLETTER */
+
+#newsletter {
+    padding: 80px 24px;
+    background-color: #242424; /* Dark theme to contrast your blog section */
+    color: white;
+    text-align: center;
+}
+
+.newsletter__container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter__title {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.newsletter__para {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-bottom: 32px;
+}
+
+.newsletter__form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.newsletter__input {
+    flex-grow: 1;
+    padding: 16px 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+}
+
+.newsletter__btn {
+    padding: 16px 32px;
+    background-color: #e26147; /* Your orange theme */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 300ms ease;
+}
+
+.newsletter__btn:hover {
+    background-color: #c94d38; /* Slightly darker orange for hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .newsletter__form {
+        flex-direction: column;
+    }
+    
+    .newsletter__btn {
+        width: 100%;
+    }
+}
+
+/* SECTION ID FOOT */
+
+#foot {
+    background-color: #242424;
+}
+
+.footer__logo--main {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, .5);  
+    margin-bottom: 24px;
+}
+
+.foot__container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Stacks the logo on top of the links */
+    align-items: center;    /* Centers items horizontally */
+    justify-content: center;
+}
+
+.footer__social--links {
+    width: 100%;
+    max-width: 700px; /* Optional: limits how far they spread so they don't hit the edges */
+    margin: 0 auto;   /* Centers the list itself */
+    display: flex;
+    justify-content: space-between; /* Pushes links to the far left, far right, and even middle */
+    align-items: center;
+    padding: 20px 0;
+}
+
+.footer__social--link {
+    color: white;
+    text-decoration: none;
+   
+    transition: all 300ms ease;
+}
+
+
+
+
+/* FOOTER */
+
+footer {
+    background-color: #242424;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.footer__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: white;
+}
+.footer__container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+.footer__logo {
+    cursor: pointer;
+}
+
+/* Ensure the music wave fits nicely in the footer */
+.music-wave span {
+    background-color: #e26147; /* Keeps the wave orange */
+}
+.music-wave {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 40px;
+    height: 30px;
+    /* transform: translateX(77px); */
+}
+
+.music-wave span {
+    width: 4px;
+    height: 100%;
+    background-color: #e26147; /* Matching your orange theme */
+    border-radius: 2px;
+    animation: waveform 1.2s ease-in-out infinite;
+}
+
+/* Staggering the bars for a wave effect */
+.music-wave span:nth-child(1) { animation-delay: 0.1s; }
+.music-wave span:nth-child(2) { animation-delay: 0.3s; }
+.music-wave span:nth-child(3) { animation-delay: 0.6s; }
+.music-wave span:nth-child(4) { animation-delay: 0.2s; }
+.music-wave span:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes waveform {
+    0%, 100% {
+        transform: scaleY(0.4);
+    }
+    50% {
+        transform: scaleY(1.2);
+    }
+}
+
+
+/* Responsive fix: Stack them on small screens */
+@media (max-width: 600px) {
+    .footer__row {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
