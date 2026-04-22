@@ -44,6 +44,10 @@ a {
     text-decoration: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .modal--open .modal {
   z-index: 60;
   box-shadow: 0 20px 80px 0 rgb(0, 0, 0.45);
@@ -236,7 +240,7 @@ nav,
 .header {
   opacity: 1;
   visibility: visible;
-  transition: all 600ms; 400ms;
+  transition: all 600ms 400ms;
 }
 
 .modal--open nav,
@@ -244,7 +248,53 @@ nav,
 .modal--open .header {
   opacity: 0;
   visibility: hidden;
-  transition: all 600ms; 200ms;   
+  transition: all 600ms 200ms;   
+}
+
+
+/* Pull your navigation, header, and mail button forward */
+nav, 
+/* 1. Pull all section content forward */
+.label__description,
+.label__row,
+.entertainment__bookings,
+.schedule,
+.newsletter,
+#foot {
+    position: relative; /* Required for z-index to work */
+    z-index: 10;        /* Higher than shapes (which are at 1) */
+}
+
+/* 2. Specific fix for the Package Cards */
+.packages__container {
+    position: relative;
+    z-index: 11; /* Slightly higher just to be safe */
+}
+
+/* 3. Keep the Audio Cockpit on the absolute top */
+.audio-toggle {
+    z-index: 1000 !important;
+}
+/* Lift the shop/hoodie section and the cards forward */
+.shop, 
+.hoodie__container, 
+.hoodie__card,
+.hoodie__card--img {
+    position: relative; /* Essential for z-index to work */
+    z-index: 10;        /* Higher than the shapes (1) */
+}
+
+/* Ensure the hoodie description/text inside the card is also on top */
+.hoodie__details {
+    position: relative;
+    z-index: 11;
+}
+
+
+/* Ensure the contact button stays on the absolute top */
+.mail__btn {
+    position: fixed;
+    z-index: 999;
 }
 
 
@@ -254,7 +304,7 @@ nav,
 .dark-theme .label__para,
 .dark-theme .label__purpose,
 .dark-theme .label__purpose--description,
-.dark-theme .label__description--para
+.dark-theme .label__description--para,
 .dark-theme .purpose,
 .dark-theme .label__pillar--title,
 .dark-theme .label__pillar--para,
@@ -318,9 +368,11 @@ nav,
 /*  LANDING PAGE */
 
 #landing-page {
+    position: relative; /* Essential for absolute shapes */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow: hidden; /* Prevents shapes from creating scrollbars */
 }
 
 .header {
@@ -392,7 +444,13 @@ nav,
     visibility: hidden;
     z-index: -1;
     opacity: 0;
-    transition: all 400ms 0.5s ease;
+    transition: all 400ms ease;
+    /* --- GLASSMORPHISM ADDITIONS --- */
+    background: rgba(255, 255, 255, 0.05); /* Very transparent white */
+    backdrop-filter: blur(15px);           /* The "frosted glass" effect */
+    -webkit-backdrop-filter: blur(15px);    /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle "glass edge" */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
 }
 /* Add this to trigger the modal's appearance */
@@ -1480,6 +1538,126 @@ filter: blur(5px);
     transition: all 300ms ease;
 }
 
+/* AUDIO */
+.audio-toggle {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 157, 0, 0.4);
+    padding: 8px 12px;
+    border-radius: 40px; /* Rounded pill shape is more compact */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: auto; /* Shrinks to fit content */
+    transition: all 300ms ease;
+}
+
+/* Make it even smaller when idle */
+.audio-toggle:not(.playing) {
+    opacity: 0.7;
+}
+
+.audio-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#audio-icon {
+    font-size: 14px; /* Smaller icon */
+    color: #ff9d00;
+    cursor: pointer;
+}
+
+.audio-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 60px;
+}
+
+.system-label {
+    font-size: 8px; /* Tiny label */
+    letter-spacing: 1px;
+    color: #888;
+    text-transform: uppercase;
+}
+
+#audio-status {
+    font-size: 10px;
+    font-weight: bold;
+    color: #ff9d00;
+}
+
+/* Compact Slider */
+.audio-slider-container {
+    width: 60px; /* Much shorter slider */
+    display: flex;
+    align-items: center;
+}
+
+#volume-slider {
+    width: 100%;
+    height: 3px;
+    accent-color: #ff9d00;
+    cursor: pointer;
+}
+
+/* Mini Visualizer */
+.visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 10px;
+}
+
+.bar {
+    width: 2px;
+    height: 100%;
+    background: #ff9d00;
+    border-radius: 1px;
+}
+.song-name-container {
+    width: 80px; /* Adjust based on cockpit size */
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+#song-name {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ff9d00;
+}
+
+/* Scroll animation on hover */
+.audio-toggle:hover #song-name {
+    animation: marquee 5s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+
+/* Animation triggers when class "playing" is added via JS */
+.playing .bar {
+    animation: bounce 0.8s ease-in-out infinite alternate;
+}
+
+.playing .bar:nth-child(2) { animation-delay: 0.2s; }
+.playing .bar:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0% { height: 20%; }
+    100% { height: 100%; }
+}
+
 
 
 
@@ -1554,3 +1732,26 @@ footer {
         gap: 20px;
     }
 }
+
+
+/* SHAPES */
+
+.shape {
+    position: fixed;
+    /* z-index: -1; */
+    pointer-events: none;
+    transition: all 600ms ease;
+    width: 20px; /* Give them a standard size */
+
+}
+
+/* Individual Coordinates (Top/Left) */
+.shape--0 { top: 15vh; left: 5vw; }
+.shape--1 { top: 20vh; left: 50vw; }
+.shape--2 { top: 10vh; left: 80vw; }
+.shape--3 { top: 45vh; left: 8vw; }
+.shape--4 { top: 50vh; left: 45vw; }
+.shape--5 { top: 55vh; left: 85vw; }
+.shape--6 { top: 80vh; left: 12vw; }
+.shape--7 { top: 85vh; left: 50vw; }
+.shape--8 { top: 75vh; left: 82vw; }

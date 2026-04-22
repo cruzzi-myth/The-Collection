@@ -72,3 +72,99 @@ function scrollSlider(direction) {
         behavior: 'smooth'
     });
 }
+/* --- DIGITAL AUDIO SYSTEM --- */
+let audioEnabled = false;
+const ambientAudio = document.getElementById('ambient-loop');
+const volumeSlider = document.getElementById('volume-slider');
+const songNameDisplay = document.getElementById('song-name');
+const visualizer = document.getElementById('visualizer');
+
+const currentTrack = {
+    title: 'BEλR CUBZ - So Gone',
+    artist: 'The Collective',
+    album: 'Sacred Frequency Sessions'
+};
+
+let fadeInterval;
+
+function toggleAudioMaster() {
+    if (!audioEnabled) {
+        ambientAudio.play();
+        ambientAudio.volume = 0; // Start at zero for the fade-in
+        audioEnabled = true;
+        
+        visualizer.classList.add('playing');
+        document.getElementById('audio-icon').className = "fas fa-volume-up click";
+        songNameDisplay.innerText = currentTrack.title.toUpperCase();
+        
+        // Start smooth fade-in to the slider's value
+        fadeAudio(volumeSlider.value);
+
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: currentTrack.title,
+                artist: currentTrack.artist,
+                artwork: [{ src: 'assets/logo.png', sizes: '512x512', type: 'image/png' }]
+            });
+        }
+    } else {
+        // Fade out before pausing
+        fadeAudio(0, () => {
+            ambientAudio.pause();
+            visualizer.classList.remove('playing');
+            document.getElementById('audio-icon').className = "fas fa-volume-mute click";
+            songNameDisplay.innerText = "IDLE...";
+            audioEnabled = false;
+        });
+    }
+}
+
+// Re-usable smooth fade function
+function fadeAudio(targetVolume, callback) {
+    clearInterval(fadeInterval);
+    fadeInterval = setInterval(() => {
+        const step = 0.01;
+        if (Math.abs(ambientAudio.volume - targetVolume) < step) {
+            ambientAudio.volume = targetVolume;
+            clearInterval(fadeInterval);
+            if (callback) callback();
+        } else {
+            ambientAudio.volume += (ambientAudio.volume < targetVolume) ? step : -step;
+        }
+    }, 30); // 30ms steps = very buttery smooth transition
+}
+
+function adjustVolume(val) {
+    // If audio is playing, allow manual control to override
+    if (audioEnabled) {
+        ambientAudio.volume = val;
+    }
+}
+
+// Scroll-Triggered Fade
+window.addEventListener('scroll', () => {
+    if (!audioEnabled) return;
+    const labelSection = document.getElementById('label');
+    const rect = labelSection.getBoundingClientRect();
+    
+    // Smoothly fade in when reaching section, fade out when leaving
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+        fadeAudio(volumeSlider.value);
+    } else {
+        fadeAudio(0);
+    }
+});
+
+function moveBackground(event) {
+  const shapes = document.querySelectorAll(".shape");
+  const x = event.clientX / 20; // Adjust number to change speed
+  const y = event.clientY / 20;
+
+  for (let i = 0; i < shapes.length; i++) { // Corrected: i < shapes.length
+    const isOdd = i % 2 !== 0;
+    const boolInt = isOdd ? -1 : 1;
+    
+    // Apply movement + a slight rotation for a more organic feel
+    shapes[i].style.transform = `translate(${x * boolInt}px, ${y * boolInt}px) rotate(${x * 5}deg)`;
+  }
+}

@@ -18,8 +18,8 @@
    })();
 </script>
 </head>
-<body>
-    <section id="landing-page">
+<body onmousemove="moveBackground(event)">
+    <section id="landing-page" >
         <nav>
             <figure class="click">
                 <img id="personal-logo" src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="">
@@ -90,9 +90,11 @@
                 </div>
             </div>
         </header>
+        <a href="#">
         <button class="mail__btn click" onclick="toggleModal()">
             <i class="fa-solid fa-envelope"></i>
         </button>
+        </a>
         <a href="#artists" class="scroll">
             <div class="scroll__icon click"></div>   
         </a>
@@ -172,7 +174,17 @@
                 Thanks for the message! Looking forward to speaking to you soon.
             </div>
         </div>
-    </section>
+        </div>
+        <img src="assets/semi circle.svg" class="shape shape--0" />
+        <img src="assets/circle.svg" class="shape shape--1" />
+        <img src="assets/squiggly.svg" class="shape shape--2" />
+        <img src="assets/circle.svg" class="shape shape--3" />
+        <img src="assets/triangle.svg" class="shape shape--4" />
+        <img src="assets/circle.svg" class="shape shape--5" />
+        <img src="assets/squiggly.svg" class="shape shape--6" />
+        <img src="assets/circle.svg" class="shape shape--7" />
+        <img src="assets/semi circle.svg" class="shape shape--8" />
+    </section> 
     <section id="artists">
         <div class="container">
             <div class="row">
@@ -685,6 +697,48 @@
         </form>
     </div>
 </section>
+<!-- DIGITAL AUDIO COCKPIT -->
+<div id="audio-control" class="audio-toggle">
+    <!-- Main Controls -->
+    <div class="audio-main">
+        <i id="audio-icon" class="fas fa-volume-mute click" onclick="toggleAudioMaster()"></i>
+        <div class="audio-text">
+           <span class="system-label">NOW PLAYING</span>
+          <div class="song-name-container">  
+            <span id="song-name">IDLE...</span>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Digital Visualizer Bars -->
+    <div id="visualizer" class="visualizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <!-- Volume Control Slider -->
+    <div class="audio-slider-container">
+        <input 
+            type="range" 
+            id="volume-slider" 
+            min="0" 
+            max="1" 
+            step="0.01" 
+            value="0.15" 
+            oninput="adjustVolume(this.value)"
+        >
+    </div>
+
+    <!-- Hidden Audio Engine -->
+    <audio id="ambient-loop" loop>
+        <!-- Replace the src with your actual audio file path -->
+        <source src="assets/so-gone.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
 
 </body>
 <section id="foot">
