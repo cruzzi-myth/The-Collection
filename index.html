@@ -6,6 +6,17 @@
     <title>The Collective</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/985afc1bd0.js" crossorigin="anonymous"></script>
+    <script src="app.js" defer></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "oCxX4lfQX28pS8TnL",
+      });
+   })();
+</script>
 </head>
 <body>
     <section id="landing-page">
@@ -42,14 +53,14 @@
                     link__hover-effect--black
                     ">Community</a>
                 </li>
-                <li class="nav__link">
+                <li class="nav__link" onclick="toggleModal()">
                     <a href="#" class="
                     nav__link--anchor
                     link__hover-effect
                     link__hover-effect--black
                     ">Contact</a>
                 </li>
-                <li class="nav__link click">
+                <li class="nav__link click" onclick="toggleContrast()">
                     <a href="#" class="
                     nav__link--anchor
                     link__hover-effect
@@ -62,7 +73,7 @@
             <div class="header__content">
                 <h1 class="title">The</h1>
                 <h1 class="title orange">Collective</h1>
-                <p class="header__para">Welcome to The <b class="orange">Collective's Mediaverse Platform. </b><br> We provide the connection between<br> <b class="orange">You and the Musical Reasources </b> that get you <b class="orange">in the mix.</b></p>
+                <p class="header__para">Welcome to The <b class="orange">Collective's Mediaverse Platform. </b><br> We provide the connection between<br> <b class="orange">You and the Musical Reasources </b> that get you <b class="orange click" onclick="toggleModal()">in the mix.</b></p>
                 <div class="social__list">
                     <a href="#" class="social__link click">
                         <i class="fa-brands fa-linkedin-in" style="color: rgb(39, 50, 53);"></i>
@@ -79,12 +90,88 @@
                 </div>
             </div>
         </header>
-        <button class="mail__btn click">
+        <button class="mail__btn click" onclick="toggleModal()">
             <i class="fa-solid fa-envelope"></i>
         </button>
         <a href="#artists" class="scroll">
             <div class="scroll__icon click"></div>   
         </a>
+        <div class="modal">
+           <div class="modal__half modal__about">
+            <h3 class="modal__title modal__title--about">Here's a bit about us.</h3>
+             <h4 class="modal__sub-title modal__sub-title--about">Ethical Music and Arts community.</h4>
+             <p class="modal__para">We are a music and arts collective that turns creative freedom into humanitarian action.<br> We provide positive, interactive experiences and a commitment to ethical responsibility, we build communities that are as fun as they are impactful.</p>
+             <div class="modal__languages">
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/ableton2.png" alt="">
+                    <span class="language__name">ableton</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/pioneer.png" alt="">
+                    <span class="language__name">pioneer</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/pixverse.jpeg" alt="">
+                    <span class="language__name">pixverse</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/serato.jpeg" alt="">
+                    <span class="language__name">serato</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/codestack.png" alt="">
+                    <span class="language__name">technology</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/burningmanlogo.png" alt="">
+                    <span class="language__name">burningman</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/insomniac.png" alt="">
+                    <span class="language__name">insomniac</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/bearcubzlogo.webp" alt="">
+                    <span class="language__name">bearcubz</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/dolab.jpeg" alt="">
+                    <span class="language__name">dolab</span>
+                </figure>
+                <figure class="modal__language">
+                    <img class="modal__language--img" src="assets/IMG_0062.JPG" alt="">
+                    <span class="language__name">cruzstudios</span>
+                </figure>
+             </div>
+           </div> 
+           <div class="modal__half modal__contact">
+            <i class="fas fa-times modal__exit click" onclick="toggleModal()"></i>
+            <h3 class="modal__title modal__title--contact">Let's have a chat!</h3>
+            <h4 class="modal__sub-title modal__sub-title--contact">We would love to hear from you.</h4>
+            <form id="contact__form" onsubmit="contact(event)">
+                <div class="form__item">
+                    <label class="form__item--lab">Name</label>
+                    <input class="input" name="user_name" type="text" required></input>
+                </div>
+                <div class="form__item">
+                    <label class="form__item--lab">Email</label>
+                    <input class="input" name="user_email" type="email" required></input>
+                </div>
+                <div class="form__item">
+                    <label class="form__item--lab">Message</label>
+                    <textarea class="input" name="message" type="text" required></textarea>
+                </div>
+                <button id="contact__submit" class="form__submit">
+                    Send it my way
+                </button>
+            </form> 
+            <div class="modal__overlay modal__overlay--loading">
+                <i class="fas fa-spinner"></i>
+            </div>
+            <div class="modal__overlay modal__overlay--success">
+                Thanks for the message! Looking forward to speaking to you soon.
+            </div>
+        </div>
     </section>
     <section id="artists">
         <div class="container">
@@ -168,44 +255,157 @@
         </div>
     </section>
     <section id="label">
-        <div class="label__container">
-            <div class="label__logo click">
-                <figure class="label__img">
-                    <img src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="">
-                </figure>
-            </div>
-         <div class="label__description">
-             <h1 class="label__title">The <b class="orange">Collective</b></h1>
-             <p class="label__description--para">Our Mission is to create environment for healing, liberation and the origin of musical authenticity...more label background and mission statement</p>
-         </div>
-            <div class="label__row">
-                <figure class="label__stage">
-                    <img class="stage__img" src="assets/stage1.jpeg" alt="stage">
-                </figure>
-                <h1 class="label__sub-title">The <b class="orange">Galactic Static</b> stage</h1>
-                <p class="stage__para">Details about the stage</p>
-                <section class="photo-grid">
-                 <div class="grid__container">
-                   <figure class="grid__item">
-                    <img src="assets/stage0.jpeg" alt="Gallery image 1">
-                   </figure>
-                   <figure class="grid__item">
-                    <img src="assets/stage2.jpeg" alt="Gallery image 2">
-                   </figure>
-                   <figure class="grid__item">
-                    <img src="assets/stage3.jpeg" alt="Gallery image 3">
-                   </figure>
-                   <figure class="grid__item">
-                    <img src="assets/stage4.jpeg" alt="Gallery image 4">
-                   </figure>
-        <!-- Add more items as needed -->
-                 </div>
-                 <div class="entertainment__bookings"></div>
-                </section>
+    <div class="label__container">
+        <!-- 1. BRANDING HEADER -->
+        <div class="label__logo click">
+            <figure class="label__img">
+                <img src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="Collective Logo">
+            </figure>
+        </div>
 
+        <!-- 2. PHILOSOPHY SECTION -->
+        <div class="label__description">
+            <h1 class="label__title">The <b class="orange">Collective</b></h1>
+            
+            <h2 class="label__sub-title">Mission Statement</h2>
+            <p class="label__description--para">Our Mission is to ignite social transformation through the freedom of creative expression and the fun of collective play. We curate interactive music and art experiences that bridge the gap between imagination and action, fostering a responsible global community dedicated to humanitarian progress and shared humanity. Everyday we are creating an environment for healing, liberation and the origin of musical authenticity.</p>
+            
+            <h2 class="label__purpose">Our Purpose</h2>
+            <p class="label__description--para">We believe that art is not a spectator sport—it is a catalyst for change. In a world that often feels fragmented, our collective serves as a vibrant bridge. By blending the raw energy of the arts with a disciplined commitment to ethical responsibility, we create spaces where people don’t just observe culture; they build it.</p>
+            
+            <ul class="label__pillars">
+                <li class="label__pillar">
+                    <strong class="label__pillar--title">Radical Freedom & Joy:</strong>
+                    <p class="label__piller--para">We champion the fun in the fundamental. By providing a playground for uninhibited musical and artistic exploration, we unlock the creative potential within every individual.</p>
+                </li>
+                <li class="label__pillar">
+                    <strong class="label__pillar--title">Interactive Community Building:</strong>
+                    <p class="label__piller--para">Our work begins where the stage ends. Through workshops, collaborative installations, and participatory performances, we turn audiences into neighbors and strangers into a support network.</p>
+                </li>
+                <li class="label__pillar">
+                    <strong class="label__pillar--title">Ethical Responsibility:</strong>
+                    <p class="label__piller--para">Humanitarianism isn't a side project; it’s our pulse. We operate with radical transparency, ensuring our projects support sustainable development, social equity, and the empowerment of marginalized voices.</p>
+                </li>
+                <li class="label__pillar">
+                    <strong class="label__pillar--title">Humanitarian Impact:</strong>
+                    <p class="label__piller--para">Every beat and every brushstroke serves a higher goal. We leverage our collective resources to fund grassroots initiatives, raise awareness for global crises, and prove that the arts are an essential tool for human rights.</p>
+                </li>
+            </ul>
+
+            <h2 class="label__purpose">Legacy & Transformation: The Inner Work</h2>
+            <p class="label__purpose--description">Beyond the stage and the gallery, our collective serves as a sanctuary for growth and a laboratory for the soul. We believe that to change the world, we must first nurture the spirits of those who inhabit it.</p> 
+            <ul class="purposes">
+                <li class="purpose"><b>Intergenerational Mentorship:</b> We are dedicated to guiding the architects of tomorrow. Our programs pair seasoned creators with emerging voices, providing the technical skills, emotional intelligence, and ethical framework needed to lead with integrity.</li>
+                <li class="purpose"><b>Rights of Passage:</b> In a world that often overlooks life’s vital transitions, we provide the "sacred space" for meaningful evolution through music, movement, and ceremony.</li>
+                <li class="purpose"><b>Energetic Alchemy & Healing:</b> We practice the art of alchemy—the intentional process of transmuting heavy experiences or trauma into vibrant, creative fuel.</li>
+            </ul>
+        </div>
+
+        <!-- 3. PRODUCTION & GALLERY -->
+        <div class="label__row">
+            <figure class="label__stage">
+                <img class="stage__img" src="assets/stage1.jpeg" alt="Galactic Static Stage">
+            </figure>
+            <h2 class="label__sub-title">The <b class="orange">Galactic Static</b> stage</h2>
+            <p class="stage__para">The centerpiece of our traveling interactive experience.</p>
+            
+            <div class="photo-grid">
+                <div class="grid__container">
+                    <figure class="grid__item"><img src="assets/stage0.jpeg" alt="Gallery image 1"></figure>
+                    <figure class="grid__item"><img src="assets/stage2.jpeg" alt="Gallery image 2"></figure>
+                    <figure class="grid__item"><img src="assets/stage3.jpeg" alt="Gallery image 3"></figure>
+                    <figure class="grid__item"><img src="assets/stage4.jpeg" alt="Gallery image 4"></figure>
+                </div>
             </div>
         </div>
-    </section>
+
+        <!-- 4. BOOKINGS SECTION -->
+        <div class="entertainment__bookings">
+            <h2 class="bookings__title">Our <span class="orange">Packages</span></h2>
+            <div class="packages__container">
+                <div class="package">
+                    <h3 class="package__name">Creative Spark</h3>
+                    <p class="package__price">Essential</p>
+                    <ul class="package__features">
+                        <li>Live Music Set (2 Hours)</li>
+                        <li>Live Art Demonstration</li>
+                        <li>Standard Sound System</li>
+                    </ul>
+                    <button class="package__button">Enquire Now</button>
+                </div>
+                <div class="package package--featured">
+                    <h3 class="package__name">The Collective Experience</h3>
+                    <p class="package__price">Immersive</p>
+                    <ul class="package__features">
+                        <li>Full Night Musical Journey</li>
+                        <li>Interactive Art Installations</li>
+                        <li>Healing & Wellness Workshop</li>
+                    </ul>
+                    <button class="package__button">Enquire Now</button>
+                </div>
+                <div class="package">
+                    <h3 class="package__name">Galactic Static Takeover</h3>
+                    <p class="package__price">All-In</p>
+                    <ul class="package__features">
+                        <li><strong>Custom Performance Stage Included</strong></li>
+                        <li>Multi-Genre Artist Lineup</li>
+                        <li>Full Production & Visuals</li>
+                    </ul>
+                    <button class="package__button">Enquire Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. SCHEDULE SECTION -->
+        <section class="schedule">
+    <h2 class="schedule__title">Upcoming <span class="orange">Gatherings</span></h2>
+    <div class="schedule__timeline">
+        
+        <!-- Event 1 -->
+        <div class="schedule__item">
+            <div class="schedule__date">
+                <span class="day">15</span>
+                <span class="month">MAY</span>
+            </div>
+            <div class="schedule__info">
+                <h4 class="schedule__event-title">Solstice Sound Bath</h4>
+                <p class="schedule__location">Topanga Canyon Sanctuary</p>
+                <p class="schedule__desc">A deep-tissue musical massage involving live ambient modular synthesis and guided meditation.</p>
+            </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="schedule__item">
+            <div class="schedule__date">
+                <span class="day">02</span>
+                <span class="month">JUN</span>
+            </div>
+            <div class="schedule__info">
+                <h4 class="schedule__event-title">Collective Canvas Live</h4>
+                <p class="schedule__location">The Warehouse District</p>
+                <p class="schedule__desc">4 DJs, 20 muralists, and 1 massive community canvas. All proceeds go to local youth art programs.</p>
+            </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="schedule__item">
+            <div class="schedule__date">
+                <span class="day">21</span>
+                <span class="month">JUN</span>
+            </div>
+            <div class="schedule__info">
+                <h4 class="schedule__event-title">Galactic Static Stage @ Solfest</h4>
+                <p class="schedule__location">Black Rock Desert</p>
+                <p class="schedule__desc">Our flagship performance stage returns for a 3-day marathon of music, fire, and frequency.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    </div>
+</section>
+
     <section id="shop">
     <div class="shop__container">
         <h2 class="shop__title">The <span class="orange">Collective</span> Threads</h2>
@@ -425,7 +625,7 @@
 <section id="community">
     <div class="community__container">
         <div class="community__header">
-            <h1 class="section__title">The <span class="orange">Community</span></h1>
+            <h1 class="section__title">Our <span class="orange">Community</span></h1>
             <div class="slider__btns">
                 <button class="slider__btn prev click" onclick="scrollSlider(-1)">&#10094;</button>
                 <button class="slider__btn next click" onclick="scrollSlider(1)">&#10095;</button>

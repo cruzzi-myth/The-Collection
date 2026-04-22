@@ -20,9 +20,11 @@ li {
 
 section {
     background-color: rgb(245, 245, 245);
+    transition: all 300ms ease;
      
 }
 .click {
+    cursor: pointer;
     transition: all 300ms ease;
 }
 
@@ -41,6 +43,14 @@ p {
 a {
     text-decoration: none;
 }
+
+.modal--open .modal {
+  z-index: 60;
+  box-shadow: 0 20px 80px 0 rgb(0, 0, 0.45);
+  visibility: visible;
+
+}
+
 
 .container {
    padding: 50px 0;
@@ -66,6 +76,79 @@ button {
 
 }
 
+input, textarea {
+   width: 100%;
+   background-color: #242424; 
+   color: white;
+   outline: none;
+   border: 2px solid #c0c4cc;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+   height: 40px;
+   transition: all 300ms ease;
+}
+input:hover, textarea:hover {
+border-color: #dcdfe6;
+}
+
+input:focus, textarea:focus {
+ border-color: #e26147;
+}
+
+textarea {
+    resize: vertical;
+}
+.lab {
+    font-size: 14px;
+    font-weight: bold;
+    
+}
+
+.form__item--lab {
+    color: white; /* This makes the "Name", "Email" labels white */
+    display: block;
+    margin-bottom: 4px;
+}
+.input {
+   width: 100%;
+   background-color: #242424; 
+   color: white;
+   outline: none;
+   border: none; /* Reset all borders first */
+   border-bottom: 1px solid #c0c4cc; /* Re-apply only the bottom border */
+   padding: 8px 0; /* Add some space so the text isn't touching the line */
+}
+
+
+.link__hover-effect{
+    position: relative;
+}
+
+.link__hover-effect--white:after {
+    background-color: #fff;
+}
+
+
+.link__hover-effect--black:after {
+    background-color: #242424;
+}
+
+.link__hover-effect:after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    height: 3px;
+    width: 0;
+    right: 0;
+    background-color: black;
+    transition: all 300ms ease;
+}
+
+.link__hover-effect:hover:after {
+    left: 0;
+    width: 100%;
+}
 
 .orange {
     color: #e26147;
@@ -148,6 +231,88 @@ nav {
     --fa-animation-duration: 4s; 
 }
 
+nav,
+.scroll,
+.header {
+  opacity: 1;
+  visibility: visible;
+  transition: all 600ms; 400ms;
+}
+
+.modal--open nav,
+.modal--open .scroll,
+.modal--open .header {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 600ms; 200ms;   
+}
+
+
+/* Target the text colors */
+.dark-theme .label__title,
+.dark-theme .label__sub-title,
+.dark-theme .label__para,
+.dark-theme .label__purpose,
+.dark-theme .label__purpose--description,
+.dark-theme .label__description--para
+.dark-theme .purpose,
+.dark-theme .label__pillar--title,
+.dark-theme .label__pillar--para,
+.dark-theme .section__title,
+.dark-theme .nav__link--anchor,
+.dark-theme .header__para,
+.dark-theme .fa-adjust,
+.dark-theme .label__row {
+    color: white !important;
+}
+
+/* Target the background of the sections */
+.dark-theme #label, 
+.dark-theme section {
+    background-color: #242424;
+}
+
+.dark-theme .scroll__icon {
+    border-color: white;
+}
+.dark-theme .scroll__icon:after,
+.dark-theme .link__hover-effect--black:after {
+    background-color: white;
+}
+
+
+.dark-theme .mail__btn {
+    background-color: black;
+}
+
+/* 1. Change the Modal Background */
+.dark-theme #cart-modal {
+    background-color: #242424;
+    color: white;
+}
+
+/* 2. Change text colors for titles and buttons */
+.dark-theme .cart-header h2,
+.dark-theme .close-btn {
+    color: white;
+}
+
+/* 3. Adjust borders so they are visible on dark background */
+.dark-theme .cart-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .cart-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 4. Update the Tab color (optional, if you want it to pop) */
+.dark-theme #cart-tab {
+    background-color: black;
+    color: white
+}
+
+
 
 
 /*  LANDING PAGE */
@@ -211,6 +376,218 @@ nav {
 }
 
 
+/* MODAL */
+
+.modal { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 850px;
+    height: 470px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    visibility: hidden;
+    z-index: -1;
+    opacity: 0;
+    transition: all 400ms 0.5s ease;
+
+}
+/* Add this to trigger the modal's appearance */
+.modal--open .modal {
+    visibility: visible;
+    z-index: 1000;
+    opacity: 1;
+}
+
+.modal--open .modal__about, .modal--open .modal__contact {
+  transform: translateX(0%);  
+}
+
+
+
+.modal__half {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    transition: all 300ms ease-in;
+}
+
+.modal__title {
+    font-size: 26px;
+    margin-top: 4px;
+    margin: 8px;
+    text-align: center;
+}
+
+.modal__sub-title {
+    margin: 12px ;
+    text-align: center;
+    font-size: 14px;
+}
+.modal__para {
+    margin: 20px;
+}
+.modal__about {
+    background-color: rgb(245, 245, 245);
+    transform: translateX(-110%);
+       
+}
+
+
+.modal__contact {
+    background-color: #242424;
+    color: white;
+    width: 50%;
+    padding: 40px; /* This pushes the content away from all four edges */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the form vertically in the modal */
+    box-sizing: border-box; /* Ensures padding doesn't make the box wider than 50% */
+    transform: translateX(110%);
+}   
+
+
+.modal__languages {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.form__item {
+    margin-bottom: 20px;
+    margin-top: 24px;
+}
+.form__submit {
+    background-color: #e26147;
+    border: 2px solid #e26147;
+    color: white;
+    font-weight: 700;
+    width: 100%;
+    max-width: 240px;
+    padding: 12px 24px;
+    font-size: 20px;
+    border-radius: 4px;
+    transition: all 300ms ease;
+}
+
+.form__submit:hover {
+    border-color: #fff;
+    background-color: transparent;
+}
+
+.form__submit:active {
+    border-color: #e26147;
+    color: #e26147;
+}
+
+.language__name {
+    position: absolute; /* Changed from relative to stay centered without pushing space */
+    bottom: -15px;      /* Adjust based on your preference */
+    transform: scale(0);
+    transition: all 300ms ease;
+    font-size: 12px;
+    white-space: nowrap; /* Prevents text from wrapping/squishing */
+    pointer-events: none; /* Mouse ignores text so hover stays on the container */
+    background-color: rgba(0, 0, 0, 0.8); /* Optional: dark background for readability */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 10;
+
+}
+.modal__language:hover .language__name {
+    transform: scale(1);
+}
+
+
+.modal__language {
+    position: relative; /* Anchor the absolute text here */
+    width: 20%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal__language--img {
+   width: 100%; 
+   aspect-ratio: 1 / 1; /* Forces the image to be a perfect square */
+    object-fit: contain; /* Scales image to fit without cropping or stretching */
+    /*filter: grayscale(1); /* Optional: makes them look more uniform/ethical theme */
+    transition: all 300ms ease;
+    border-radius: 4px;
+}
+
+.modal__language--img:hover {
+    filter: grayscale(.25);
+    transform: scale(1.1);
+}
+
+
+.modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center; 
+    z-index: -1;
+}
+
+.modal__overlay--visible {
+  
+   display: flex !important; /* Forces it to show */
+   z-index: 100 !important;   /* Ensures it's on top of everything */
+}
+
+
+.modal__overlay--loading {
+    background-color: #242424;
+    font-size: 80px;
+    z-index: -1;
+}
+
+.fa-spinner {
+animation: spinner 1400ms infinite linear;
+}
+
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.modal__overlay--success {
+   background-color: #4bb543;
+   font-size: 40px;
+   font-weight: 700;
+   text-align: center;
+   padding: 28px;
+
+}
+
+.modal__exit {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    color: #fff;
+    font-size: 36px;
+    z-index: 100;
+
+}
+
 /* ARTISTS */
 
 .section__title {
@@ -223,6 +600,7 @@ nav {
     height: 100%;      /* Forces image to match the container's height */
     object-fit: cover;  /* Crops and zooms to fill the box without squishing */
     display: block;
+    transition: all 550ms ease;
 }
 
 .artist__wrapper {
@@ -246,7 +624,7 @@ overflow: hidden;
     transform: translateY(-50%);
 }
 .artist__wrapper:hover .artist__img {
-transform: scale(1.07);
+transform: scale(1.11);
 filter: blur(5px);
 }
 
@@ -310,11 +688,12 @@ filter: blur(5px);
 
 /* Logo and Description Section */
 .label__description {
+    text-align: center;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
+    align-items: center;
+    max-width: 800px; /* Optional: keeps text readable */
+    margin: 0 auto;   /* Centers the container itself */
 }
 
 .label__title {
@@ -351,6 +730,59 @@ filter: blur(5px);
 
 }
 
+/* Space out the Mission Statement section */
+.label__sub-title {
+    margin-top: 28px;    /* Space above 'Mission Statement' */
+    margin-bottom: 22px; /* Space between title and its paragraph */
+}
+
+/* Space out the Purpose section */
+.label__purpose {
+    margin-top: 48px;    /* Larger gap to separate from the mission above */
+    margin-bottom: 20px; /* Space between 'Our Purpose' and its paragraph */
+}
+
+/* Tighten up the paragraph spacing if needed */
+.label__description--para {
+    margin-bottom: 10px; /* Space after the paragraph ends */
+    line-height: 1.6;
+}
+/* 1. Center the headings and description */
+.label__purpose, 
+.label__purpose--description {
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.label__purpose {
+    margin-top: 64px;    /* Matches the spacing of your 'Our Purpose' title */
+    margin-bottom: 24px;
+}
+
+/* 2. Style the list like the Pillars */
+.purposes {
+    text-align: left;        /* Aligns text to the left */
+    list-style: none;        /* Removes bullets */
+    padding: 0;
+    margin-top: 40px;
+    width: 100%;             /* Ensures it spans the container width */
+}
+
+.purpose {
+    margin-bottom: 24px;
+    line-height: 1.6;        /* Improves readability for long text */
+}
+
+.purpose b {
+    display: block;          /* Puts the bold title on its own line */
+    color: #e26147;          /* Uses your orange theme */
+    font-size: 18px;
+    margin-bottom: 8px;      /* Space between bold title and description */
+}
+
+
 /* Feature Row (Stage Section) */
 .label__row {
     display: flex;
@@ -366,6 +798,30 @@ filter: blur(5px);
 
 .label__row:hover {
     transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* 2. Style the Pillar List to align left */
+.label__pillars {
+    text-align: left;        /* Aligns text inside the list to the left */
+    list-style: none;        /* Removes default bullets if preferred */
+    padding: 0;
+    margin-top: 40px;
+    width: 100%;             /* Ensures list spans the container width */
+}
+
+.label__pillar {
+    margin-bottom: 24px;
+}
+
+.label__pillar--title {
+    display: block;          /* Puts title on its own line */
+    font-size: 18px;
+    color: #e26147;          /* Matches your orange theme */
+}
+
+.label__piller--para {
+    margin-top: 8px;
+    line-height: 1.6;
 }
 
 /* Image Styling */
@@ -424,6 +880,172 @@ filter: blur(5px);
     .label__title {
         font-size: 36px;
     }
+}
+
+
+/* BOOKINGS */
+.entertainment__bookings {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.bookings__title {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.packages__container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Allows stacking on mobile */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.package {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 40px 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 300ms ease;
+}
+
+.package:hover {
+    transform: translateY(-10px);
+}
+
+/* Highlight the middle tier */
+.package--featured {
+    background: #242424;
+    color: white;
+    border: 2px solid #ff9d00; /* Your orange */
+    transform: scale(1.05);
+}
+
+.package--featured:hover {
+    transform: scale(1.08) translateY(-10px);
+}
+
+.package__name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.package__price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff9d00;
+    margin-bottom: 20px;
+}
+
+.package__features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    flex-grow: 1; /* Pushes button to the bottom */
+}
+
+.package__features li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.package--featured .package__features li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.package__button {
+    background-color: #ff9d00;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* EVENT SCHEDULE */
+
+.schedule {
+    padding: 100px 20px;
+    background-color: #1a1a1a; /* Slightly darker than the modal for depth */
+    color: white;
+}
+
+.schedule__title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.5rem;
+}
+
+.schedule__timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* The vertical line */
+.schedule__timeline::before {
+    content: '';
+    position: absolute;
+    left: 50px; /* Aligns with the center of the date circles */
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #ff9d00, transparent);
+}
+
+.schedule__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.schedule__date {
+    width: 100px;
+    height: 100px;
+    background-color: #242424;
+    border: 2px solid #ff9d00;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(255, 157, 0, 0.3);
+}
+
+.day { font-size: 24px; font-weight: bold; }
+.month { font-size: 12px; color: #ff9d00; }
+
+.schedule__info {
+    padding-left: 40px;
+    text-align: left;
+}
+
+.schedule__event-title {
+    font-size: 20px;
+    color: #ff9d00;
+    margin-bottom: 4px;
+}
+
+.schedule__location {
+    font-size: 14px;
+    font-style: italic;
+    color: #c0c4cc;
+    margin-bottom: 12px;
+}
+
+.schedule__desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #e0e0e0;
 }
 
 
@@ -553,15 +1175,19 @@ filter: blur(5px);
 
 /* SHOPPING CART */
 
+.cart-items-list {
+    max-height: 400px; /* Limits height */
+    overflow-y: auto;  /* Adds scrollbar if too many items */
+    margin: 20px 0;
+}
+
 .cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    max-height: 400px; /* Limits height */
-    overflow-y: auto;  /* Adds scrollbar if too many items */
-    margin: 20px 0;
+    
 }
 
 .empty-msg {
@@ -747,6 +1373,7 @@ filter: blur(5px);
 /* NEWSLETTER */
 
 #newsletter {
+    width: 100%;
     padding: 80px 24px;
     background-color: #242424; /* Dark theme to contrast your blog section */
     color: white;
@@ -814,6 +1441,7 @@ filter: blur(5px);
 /* SECTION ID FOOT */
 
 #foot {
+    width: 100%;
     background-color: #242424;
 }
 
@@ -858,6 +1486,7 @@ filter: blur(5px);
 /* FOOTER */
 
 footer {
+    width: 100%;
     background-color: #242424;
     padding: 40px 0;
     display: flex;
