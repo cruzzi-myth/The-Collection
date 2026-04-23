@@ -1554,6 +1554,7 @@ filter: blur(5px);
     gap: 12px;
     width: auto; /* Shrinks to fit content */
     transition: all 300ms ease;
+    max-height: 30px;
 }
 
 /* Make it even smaller when idle */
@@ -1690,6 +1691,7 @@ footer {
 /* Ensure the music wave fits nicely in the footer */
 .music-wave span {
     background-color: #e26147; /* Keeps the wave orange */
+    cursor: pointer;
 }
 .music-wave {
     display: flex;
@@ -1732,6 +1734,171 @@ footer {
         gap: 20px;
     }
 }
+
+/* --- UNIQUE DIGITAL LIBRARY MODAL --- */
+.library-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px); /* Slightly deeper blur for distinction */
+  -webkit-backdrop-filter: blur(15px);
+  display: none; /* Controlled by JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 3000; /* Set higher than other modals to ensure it's on top */
+  transition: all 400ms ease;
+  padding: 20px;
+}
+
+/* UNIQUE visibility class to avoid clash with contact modal */
+.library-modal--visible {
+  display: flex;
+}
+
+/* UNIQUE body lock class */
+body.library--open {
+  overflow: hidden !important;
+}
+
+.library-modal__content {
+  background: rgba(10, 10, 10, 0.95); /* Darker background for library */
+  border: 1px solid rgba(255, 94, 0, 0.3); /* The orange theme border */
+  padding: 48px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 550px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  animation: libraryFadeIn 450ms ease-out;
+}
+
+@keyframes libraryFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.library-modal__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.library-modal__close:hover {
+  color: #ff5e00;
+  transform: rotate(90deg);
+}
+
+.library-title {
+  font-size: 32px;
+  margin-bottom: 32px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* --- LIBRARY ITEMS GRID --- */
+.library-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Custom Orange Scrollbar */
+.library-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.library-grid::-webkit-scrollbar-thumb {
+  background: #ff5e00;
+  border-radius: 10px;
+}
+
+.library-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: all 300ms ease;
+  text-decoration: none;
+  color: white;
+}
+
+.library-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 94, 0, 0.4);
+  transform: translateX(5px); /* Slight slide instead of scale for a unique feel */
+}
+
+.library-item i {
+  font-size: 22px;
+  min-width: 30px;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.library-item .fa-play-circle:hover {
+  color: #ff5e00;
+}
+
+.library-item .fa-stop-circle {
+  margin-left: auto;
+  opacity: 0.5;
+  font-size: 18px;
+}
+
+.library-item .fa-stop-circle:hover {
+  color: #ff3c00;
+  opacity: 1;
+}
+
+.library-item__info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.item-category {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ff5e00;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.item-name {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* Link Styling */
+.library-item.external i {
+  color: #00ccff;
+}
+
+/* Footer Interaction */
+.footer__logo, .music-wave {
+  cursor: pointer;
+  transition: opacity 300ms;
+}
+
+.footer__logo:hover, .music-wave:hover {
+  opacity: 0.7;
+}
+
 
 
 /* SHAPES */

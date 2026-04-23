@@ -154,6 +154,35 @@ window.addEventListener('scroll', () => {
         fadeAudio(0);
     }
 });
+/* --- DIGITAL LIBRARY MODAL (UNIQUE) --- */
+let isLibraryOpen = false;
+
+function toggleLibrary() {
+    const libraryElement = document.getElementById('library-modal');
+    
+    if (!isLibraryOpen) {
+        isLibraryOpen = true;
+        libraryElement.classList.add("library-modal--visible");
+        document.body.classList.add("library--open"); // Unique body class
+    } else {
+        isLibraryOpen = false;
+        libraryElement.classList.remove("library-modal--visible");
+        document.body.classList.remove("library--open");
+        stopAllLibraryAudio(); // Stops music when closed
+    }
+}
+
+function stopAllLibraryAudio() {
+    const libraryTracks = document.querySelectorAll('#library-modal audio');
+    libraryTracks.forEach(track => {
+        track.pause();
+        track.currentTime = 0;
+    });
+}
+
+// Add this to your "Expose Functions" list at the very bottom
+window.toggleLibrary = toggleLibrary;
+
 
 function moveBackground(event) {
   const shapes = document.querySelectorAll(".shape");

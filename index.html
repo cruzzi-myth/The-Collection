@@ -22,7 +22,7 @@
     <section id="landing-page" >
         <nav>
             <figure class="click">
-                <img id="personal-logo" src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="">
+                <img id="personal-logo" onclick="toggleModal()" src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="">
             </figure>
             <ul class="nav__link--list">
                 <li class="nav__link">
@@ -271,7 +271,7 @@
         <!-- 1. BRANDING HEADER -->
         <div class="label__logo click">
             <figure class="label__img">
-                <img src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="Collective Logo">
+                <img onclick="toggleContrast()" src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" alt="Collective Logo">
             </figure>
         </div>
 
@@ -749,8 +749,8 @@
 </body>
 <section id="foot">
     <div class="foot__container">
-        <figure>
-            <img src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" class="footer__logo--main click" alt="">
+        <figure class="click">
+            <img onclick="toggleModal()" src="assets/_2ab1ac98-4a76-4340-a30f-4a4d92de8c56.jpeg" class="footer__logo--main">
         </figure>
         <div class="footer__social--links">
          <a href="#" class="
@@ -799,29 +799,94 @@
         </div>
     </div>
 </section>
+<!-- --- 5. FOOTER SECTION --- -->
 <footer>
- <div class="footer__container">
-    <div class="footer__row">
-        <!-- Logo or text on the left -->
-        <div class="footer__logo click">
-            <b class="orange">Mediaverse</b>
-        </div>
+    <div class="footer__container">
+        <div class="footer__row">
+            <!-- Logo trigger: Opens Library -->
+            <div class="footer__logo click" onclick="toggleLibrary()">
+                <b class="orange">Mediaverse</b>
+            </div>
 
-        <!-- Your moving music wave in the center -->
-        <div class="music-wave">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+            <!-- Music Wave trigger: Opens Library -->
+            <div class="music-wave click" onclick="toggleLibrary()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-        <!-- Copyright on the right -->
-        <div class="footer__copyright">
-            Copyright &copy; 2024 The Collective
+            <div class="footer__copyright">
+                Copyright &copy; 2024 The Collective
+            </div>
         </div>
     </div>
- </div>
 </footer>
+
+<!-- --- 6. DIGITAL LIBRARY MODAL --- -->
+<div id="library-modal" class="library-modal">
+    <div class="library-modal__content">
+        <!-- Close Button -->
+        <button class="library-modal__close" onclick="toggleLibrary()">&times;</button>
+        
+        <h2 class="library-title">Mediaverse <span class="orange">Assets</span></h2>
+        
+        <div class="library-grid">
+            
+            <!-- TRACK 1 -->
+            <audio id="track-1" src="./assets/sacred-frequency.mp3" preload="auto"></audio>
+            <div class="library-item">
+                <i class="fas fa-play-circle click" onclick="document.getElementById('track-1').play()"></i>
+                <div class="library-item__info">
+                    <span class="item-category">Audio</span>
+                    <span class="item-name">Sacred Frequency (Demo)</span>
+                </div>
+                <i class="fas fa-stop-circle click" onclick="document.getElementById('track-1').pause(); document.getElementById('track-1').currentTime = 0;"></i>
+            </div>
+
+            <!-- TRACK 2 -->
+            <audio id="track-2" src="./assets/galactic-static.mp3" preload="auto"></audio>
+            <div class="library-item">
+                <i class="fas fa-play-circle click" onclick="document.getElementById('track-2').play()"></i>
+                <div class="library-item__info">
+                    <span class="item-category">Audio</span>
+                    <span class="item-name">Galactic Static (Live)</span>
+                </div>
+                <i class="fas fa-stop-circle click" onclick="document.getElementById('track-2').pause(); document.getElementById('track-2').currentTime = 0;"></i>
+            </div>
+
+            <!-- TRACK 3 -->
+            <audio id="track-3" src="./assets/ambient-drift.mp3" preload="auto"></audio>
+            <div class="library-item">
+                <i class="fas fa-play-circle click" onclick="document.getElementById('track-3').play()"></i>
+                <div class="library-item__info">
+                    <span class="item-category">Audio</span>
+                    <span class="item-name">Ambient Drift</span>
+                </div>
+                <i class="fas fa-stop-circle click" onclick="document.getElementById('track-3').pause(); document.getElementById('track-3').currentTime = 0;"></i>
+            </div>
+
+            <!-- DIGITAL FILE ITEM -->
+            <div class="library-item" onclick="window.open('./assets/blueprint.pdf', '_blank')">
+                <i class="fas fa-file-pdf"></i>
+                <div class="library-item__info">
+                    <span class="item-category">Digital</span>
+                    <span class="item-name">Project Blueprint.PDF</span>
+                </div>
+            </div>
+
+            <!-- EXTERNAL HUB LINK -->
+            <a href="https://your-external-site.com" target="_blank" class="library-item external">
+                <i class="fas fa-external-link-alt"></i>
+                <div class="library-item__info">
+                    <span class="item-category">Portal</span>
+                    <span class="item-name">Enter Main Hub</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
 
 </html>
