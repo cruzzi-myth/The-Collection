@@ -168,3 +168,5 @@ function moveBackground(event) {
     shapes[i].style.transform = `translate(${x * boolInt}px, ${y * boolInt}px) rotate(${x * 5}deg)`;
   }
 }
+// Add this at the end of your script file
+window.toggleModal = toggleModal;

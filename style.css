@@ -1594,7 +1594,7 @@ filter: blur(5px);
 
 /* Compact Slider */
 .audio-slider-container {
-    width: 60px; /* Much shorter slider */
+    width: 40px; /* Much shorter slider */
     display: flex;
     align-items: center;
 }
